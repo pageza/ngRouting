@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 // require the the controllers from "../controller/<file names>"
 const tasks = require('../controllers/tasks');
+const path = require('path')
 
 
 module.exports = (app) => {
@@ -25,4 +26,7 @@ module.exports = (app) => {
     app.delete('/tasks/:id', (req, res) => {
         tasks.destroyTask(req,res)
     });
+    app.all("*", (req,res,next) => {
+        res.sendFile(path.resolve("./public/dist/public/index.html"))
+    })
 }
